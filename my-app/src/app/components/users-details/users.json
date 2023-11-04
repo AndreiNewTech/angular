@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "name": "John",
+    "surname": "Doe",
+    "address": "123 Main Street",
+    "studies": ["Bachelor's in Computer Science", "Master's in Business Administration"],
+    "age": 30,
+    "profession": "Software Engineer",
+    "experience": [
+      {
+        "jobTitle": "Software Developer",
+        "years": 5,
+        "location": "San Francisco"
+      },
+      {
+        "jobTitle": "Senior Software Engineer",
+        "years": 3,
+        "location": "New York"
+      }
+    ],
+    "hobbies": ["Reading", "Hiking", "Cooking"],
+    "competencies": ["JavaScript", "React", "Node.js"]
+  },
+  {
+    "id": 2,
+    "name": "Alice",
+    "surname": "Smith",
+    "address": "456 Elm Street",
+    "studies": ["Bachelor's in Electrical Engineering"],
+    "age": 28,
+    "profession": "Electrical Engineer",
+    "experience": [
+      {
+        "jobTitle": "Electrical Engineer",
+        "years": 4,
+        "location": "Los Angeles"
+      }
+    ],
+    "hobbies": ["Swimming", "Photography"],
+    "competencies": ["Circuit Design", "Power Systems"]
+  },
+  {
+    "id": 3,
+    "name": "Michael",
+    "surname": "Johnson",
+    "address": "789 Oak Avenue",
+    "studies": ["Bachelor's in Physics", "Master's in Astrophysics"],
+    "age": 32,
+    "profession": "Astrophysicist",
+    "experience": [
+      {
+        "jobTitle": "Research Assistant",
+        "years": 3,
+        "location": "Houston"
+      },
+      {
+        "jobTitle": "Astrophysicist",
+        "years": 5,
+        "location": "Chicago"
+      }
+    ],
+    "hobbies": ["Stargazing", "Chess"],
+    "competencies": ["Astrophysical Modeling", "Data Analysis"]
+  },
+  {
+    "id": 4,
+    "name": "Emily",
+    "surname": "Brown",
+    "address": "101 Pine Lane",
+    "studies": ["Bachelor's in Marketing"],
+    "age": 27,
+    "profession": "Marketing Manager",
+    "experience": [
+      {
+        "jobTitle": "Marketing Coordinator",
+        "years": 4,
+        "location": "Boston"
+      },
+      {
+        "jobTitle": "Marketing Manager",
+        "years": 3,
+        "location": "San Diego"
+      }
+    ],
+    "hobbies": ["Traveling", "Painting"],
+    "competencies": ["Market Research", "Digital Marketing"]
+  },
+  {
+    "id": 5,
+    "name": "William",
+    "surname": "Wilson",
+    "address": "222 Maple Drive",
+    "studies": ["Bachelor's in Finance", "Master's in Finance"],
+    "age": 29,
+    "profession": "Financial Analyst",
+    "experience": [
+      {
+        "jobTitle": "Financial Analyst",
+        "years": 6,
+        "location": "New York"
+      }
+    ],
+    "hobbies": ["Golf", "Reading"],
+    "competencies": ["Financial Modeling", "Data Analysis"]
+  },
+  {
+    "id": 6,
+    "name": "Olivia",
+    "surname": "Davis",
+    "address": "333 Oak Avenue",
+    "studies": ["Bachelor's in Nursing", "Master's in Healthcare Administration"],
+    "age": 31,
+    "profession": "Registered Nurse",
+    "experience": [
+      {
+        "jobTitle": "RN",
+        "years": 8,
+        "location": "Los Angeles"
+      }
+    ],
+    "hobbies": ["Yoga", "Cooking"],
+    "competencies": ["Patient Care", "Healthcare Management"]
+  },
+  {
+    "id": 7,
+    "name": "James",
+    "surname": "Lee",
+    "address": "444 Birch Street",
+    "studies": ["Bachelor's in Psychology", "Master's in Counseling"],
+    "age": 26,
+    "profession": "Psychologist",
+    "experience": [
+      {
+        "jobTitle": "Psychology Intern",
+        "years": 2,
+        "location": "Seattle"
+      },
+      {
+        "jobTitle": "Licensed Psychologist",
+        "years": 4,
+        "location": "Portland"
+      }
+    ],
+    "hobbies": ["Hiking", "Reading"],
+    "competencies": ["Therapy", "Counseling"]
+  },
+  {
+    "id": 8,
+    "name": "Sophia",
+    "surname": "Martin",
+    "address": "555 Cedar Lane",
+    "studies": ["Bachelor's in Education", "Master's in Educational Leadership"],
+    "age": 30,
+    "profession": "Educational Administrator",
+    "experience": [
+      {
+        "jobTitle": "Teacher",
+        "years": 5,
+        "location": "Chicago"
+      },
+      {
+        "jobTitle": "Principal",
+        "years": 3,
+        "location": "Miami"
+      }
+    ],
+    "hobbies": ["Traveling", "Photography"],
+    "competencies": ["Curriculum Development", "School Administration"]
+  },
+  {
+    "id": 9,
+    "name": "Liam",
+    "surname": "Garcia",
+    "address": "666 Willow Drive",
+    "studies": ["Bachelor's in Chemistry"],
+    "age": 29,
+    "profession": "Chemist",
+    "experience": [
+      {
+        "jobTitle": "Research Assistant",
+        "years": 3,
+        "location": "San Francisco"
+      },
+      {
+        "jobTitle": "Chemist",
+        "years": 6,
+        "location": "Los Angeles"
+      }
+    ],
+    "hobbies": ["Playing Guitar", "Cooking"],
+    "competencies": ["Chemical Analysis", "Laboratory Techniques"]
+  },
+  {
+    "id": 10,
+    "name": "Ava",
+    "surname": "Rodriguez",
+    "address": "777 Pine Street",
+    "studies": ["Bachelor's in Environmental Science", "Master's in Environmental Management"],
+    "age": 28,
+    "profession": "Environmental Scientist",
+    "experience": [
+      {
+        "jobTitle": "Environmental Scientist",
+        "years": 4,
+        "location": "Houston"
+      }
+    ],
+    "hobbies": ["Hiking", "Photography"],
+    "competencies": ["Environmental Assessment", "Sustainability"]
+  }
+]
