@@ -1,0 +1,19 @@
+<p>users-select works!</p>
+
+
+<section class="users-select">
+  <ul class="users-select__list">
+    <li *ngFor="let user of users">
+      <button 
+      (click)="handleUserClick($event, user.id)" 
+      class="user-select__btn"
+      [ngClass]="{'selected-user': selectedUser?.id === user.id }"
+      >
+        {{ user.name }}
+      </button>
+    </li>
+  </ul>
+</section>
+
+
+

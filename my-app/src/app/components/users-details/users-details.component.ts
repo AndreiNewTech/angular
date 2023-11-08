@@ -1,33 +1,21 @@
 import { Component } from '@angular/core';
+import type { User } from './types';
 import jsonval from './users.json';
-
-interface UserExperience {
-  jobTitle: string;
-  years: number;
-  location: string;
-}
-
-interface User {
-  id: number;
-  name: string;
-  surname: string;
-  address: string;
-  studies: string[];
-  age: number;
-  profession: string;
-  experience: UserExperience[];
-  hobbies: string[];
-  compettencies: string[];
-}
 
 @Component({
   selector: 'app-users-details',
   templateUrl: './users-details.component.html',
+  styleUrls: ['./users-details.component.scss'],
 })
 export class UsersDetailsComponent {
   users: User[] = [];
+  selectedUser: User | undefined;
 
   constructor() {
-    // console.log(jsonval);
+    this.users = jsonval;
+  }
+
+  handleSelectuserEvent(e: User) {
+    this.selectedUser = e;
   }
 }

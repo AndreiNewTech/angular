@@ -1,5 +1,6 @@
-<p>User Details</p>
+
 
 <div class="users-details">
-
+  <app-users-select [users]="users" (selectUserEvent)="handleSelectuserEvent($event)"></app-users-select>
+  <app-user-details [selectedUser]="selectedUser" ></app-user-details>
 </div>

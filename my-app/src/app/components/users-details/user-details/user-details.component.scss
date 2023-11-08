@@ -1,0 +1,18 @@
+
+
+.user-details {
+  .user-details__container {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  .user-details__extra-container {
+    display: flex;
+  }
+}
+
+img {
+  width: 140px;
+  display: block;
+  margin: auto;
+}

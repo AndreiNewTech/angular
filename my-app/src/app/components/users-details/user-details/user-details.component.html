@@ -1,0 +1,114 @@
+
+<section *ngIf="selectedUser else noSelection" class="user-details">
+  <h2> User Details </h2>
+  <div  class="user-details__container">
+    <div>
+      <h3>Name</h3>
+      <p> {{ selectedUser.name}}  </p>
+    </div>
+
+    <div>
+      <h3>Surname</h3>
+      <p> {{ selectedUser.surname}}  </p>
+    </div>
+
+    <div>
+      <h3>Address</h3>
+      <p> {{ selectedUser.address}}  </p>
+    </div>
+
+    <div>
+      <h3>Age</h3>
+      <p> {{ selectedUser.age}}  </p>
+    </div>
+
+    <div>
+      <h3>Profession</h3>
+      <p> {{ selectedUser.profession}}  </p>
+    </div>
+  </div>
+
+
+  <h2>Extra Details</h2>
+  <div class="user-details__extra-container">
+    <table>
+      <tr>
+        <th>Nr.</th>
+        <th>Studies</th>
+      </tr>
+
+      <tr *ngFor="let study of selectedUser?.studies; let i = index">
+        <td>
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ study }}
+        </td>
+      </tr>
+    </table>
+
+
+
+    <table>
+      <tr>
+        <th>Nr.</th>
+        <th>Competencies</th>
+      </tr>
+
+      <tr *ngFor="let competency of selectedUser?.competencies; let i = index">
+        <td>
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ competency }}
+        </td>
+      </tr>
+    </table>
+
+
+    <table>
+      <tr>
+        <th>Nr.</th>
+        <th>Hobby</th>
+      </tr>
+
+      <tr *ngFor="let hobby of selectedUser?.hobbies; let i = index">
+        <td>
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ hobby }}
+        </td>
+      </tr>
+    </table>
+
+    <table>
+      <tr>
+        <th>Nr.</th>
+        <th>Job Title</th>
+        <th>Years</th>
+        <th>Location</th>
+      </tr>
+
+      <tr *ngFor="let experience of selectedUser?.experience; let i = index">
+        <td>
+          {{ i + 1 }}
+        </td>
+        <td>
+          {{ experience.jobTitle }}
+        </td>
+        <td>
+          {{ experience.years }}
+        </td>
+        <td>
+          {{ experience.location }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<ng-template #noSelection>
+  <img src="https://cdni.iconscout.com/illustration/premium/thumb/no-data-found-8867280-7265556.png" alt="">
+</ng-template>
+
