@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from '@angular/core';
 
 export enum Size {
   xl = 'xl',
@@ -21,6 +27,11 @@ export interface Product {
 export class ProductListComponent {
   @Input() childInputValue = '';
   @Output() childEventOutputToParent = new EventEmitter<string>();
+
+  registerForm = {
+    name: '',
+    email: '',
+  };
 
   ngModelInputValue = 'Hello Ng Model';
   isDivVisible: boolean = true;
@@ -88,5 +99,10 @@ export class ProductListComponent {
 
   handleSendDataToParentClick() {
     this.childEventOutputToParent.emit('Hello');
+  }
+
+  handleSubmit(formValue: any) {
+    console.log(this.registerForm);
+    console.log(formValue);
   }
 }

@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  // momentVal: string = moment().format('dddd');
-
   handleChildEvent(event: any) {
     console.log(event);
   }
+
+  constructor() {}
 }

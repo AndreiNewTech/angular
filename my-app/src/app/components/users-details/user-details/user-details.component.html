@@ -95,7 +95,7 @@
           {{ i + 1 }}
         </td>
         <td>
-          {{ experience.jobTitle }}
+            {{ experience.jobTitle | uppercase }}
         </td>
         <td>
           {{ experience.years }}
@@ -108,7 +108,12 @@
   </div>
 </section>
 
+
 <ng-template #noSelection>
   <img src="https://cdni.iconscout.com/illustration/premium/thumb/no-data-found-8867280-7265556.png" alt="">
 </ng-template>
 
+
+
+
+<!--   -->
