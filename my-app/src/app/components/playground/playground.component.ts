@@ -20,11 +20,11 @@ export interface Product {
 }
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.scss'],
+  selector: 'app-playground',
+  templateUrl: './playground.component.html',
+  styleUrls: ['./playground.component.scss'],
 })
-export class ProductListComponent {
+export class PlaygroundComponent {
   @Input() childInputValue = '';
   @Output() childEventOutputToParent = new EventEmitter<string>();
 

@@ -1,9 +1,4 @@
-
-.users-details {
-  max-width: 800px;
-  margin: 0 auto;
-
-
+.add-user {
   .user-form {
     max-width: 600px;
     margin: 20px auto;
@@ -65,5 +60,39 @@
     cursor: pointer;
   }
 
+  .experience__text {
+    cursor: pointer;
+  }
 
+
+  .experience-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 10px;
+
+    grid-template-areas: 
+    "input1 input2"
+    "input3 input3"
+    "add-container add-container"
+  }
+
+  .input-container--sub-3 {
+    grid-area: input3;
+  }
+
+  .input-container--sub-2 {
+    grid-area: input2;
+  }
+
+  .input-container--sub-2 {
+    grid-area: input1;
+  }  
+
+
+  .experience__add-container {
+    display: flex;
+    justify-content: center;
+    grid-area: add-container;
+  }
 }

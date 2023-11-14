@@ -1,22 +1,18 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import type { User } from './types';
-import jsonval from './users.json';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { User } from '../users-details/types';
 
 @Component({
-  selector: 'app-users-details',
-  templateUrl: './users-details.component.html',
-  styleUrls: ['./users-details.component.scss'],
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.scss'],
 })
-export class UsersDetailsComponent implements OnInit {
-  users: User[] = [];
-  selectedUser: User | undefined;
-  renderHello: boolean = true;
+export class AddUserComponent {
   nameInputBlurred: boolean = false;
-  addFormExtraDetails: boolean = false;
-  addExperience: boolean = false;
+  isAddFormExtraDetailsOpen: boolean = false;
+  isAddExperienceOpen: boolean = false;
+  users: User[] = [];
 
   @ViewChild('extraDetails') extraDetails: ElementRef | undefined;
-
   userForm = {
     name: '',
     surname: '',
@@ -24,31 +20,16 @@ export class UsersDetailsComponent implements OnInit {
     age: '',
     profession: '',
     studies: '',
-    experience: '',
+    experience: [],
     hobbies: '',
     competencies: '',
   };
 
-  constructor() {
-    this.users = jsonval;
-  }
-
-  ngOnChanges(ev: Object) {}
-
-  ngDoCheck() {
-    console.log(this.userForm);
-    const studiesList = this.userForm.studies.split(',');
-    console.log(studiesList);
-  }
-
-  ngOnInit() {
-    // Initializam cu primul user
-    this.selectedUser = this.users[0];
-  }
-
-  handleSelectuserEvent(e: User) {
-    this.selectedUser = e;
-  }
+  experienceSubForm = {
+    jobTitle: '',
+    years: '',
+    location: '',
+  };
 
   handleSubmit(form: any) {
     const lastUserId = this.users.at(-1)?.id ?? 0;
@@ -77,7 +58,7 @@ export class UsersDetailsComponent implements OnInit {
       age: '',
       profession: '',
       studies: '',
-      experience: '',
+      experience: [],
       hobbies: '',
       competencies: '',
     };
@@ -89,7 +70,15 @@ export class UsersDetailsComponent implements OnInit {
 
   handleAddExtraDetails(e: Event) {
     if (this.extraDetails?.nativeElement === e.target) {
-      this.addFormExtraDetails = !this.addFormExtraDetails;
+      this.isAddFormExtraDetailsOpen = !this.isAddFormExtraDetailsOpen;
     }
+  }
+
+  handleAddExperienceOpen() {
+    this.isAddExperienceOpen = !this.isAddExperienceOpen;
+  }
+
+  handleAddExperience() {
+    console.log(this.experienceSubForm);
   }
 }

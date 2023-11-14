@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import * as moment from 'moment';
+import { routesDetails } from './app-routing.module';
 
 @Component({
   selector: 'app-root',

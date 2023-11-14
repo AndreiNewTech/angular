@@ -1,0 +1,136 @@
+ <!-- Create user form -->
+<div class="add-user">
+
+
+
+  <form class="user-form" #form="ngForm" action="" (ngSubmit)="handleSubmit(form)">
+    <div class="input-container">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name"
+        (blur)="handleInputBlur()"
+        [(ngModel)]="userForm.name"
+        required
+        minlength="4"
+        #name="ngModel"
+      >
+    </div>
+  
+    <div *ngIf="name.invalid && (name.dirty || name.touched)">
+      <small *ngIf="name.errors?.['required']" class="error-message">Name is required.</small>
+      <small *ngIf="name.errors?.['minlength'] && nameInputBlurred" class="error-message">Name is too short.</small>
+    </div>
+  
+    <div class="input-container">
+      <label for="surname">Surname</label>
+      <input type="text" name="surname" id="surname"
+        [(ngModel)]="userForm.surname"
+        required
+      >
+    </div>
+  
+    <div class="input-container">
+      <label for="address">Address</label>
+      <input type="text" name="address" id="address"
+      [(ngModel)]="userForm.address"
+    > 
+    </div>
+  
+    <div class="input-container">
+      <label for="age">Age</label>
+      <input type="number" name="age" id="age"
+      [(ngModel)]="userForm.age"
+      min="18"
+    >
+    </div>
+  
+    <div class="input-container">
+      <label for="profession">Profession</label>
+      <input type="text" name="profession" id="profession"
+      [(ngModel)]="userForm.profession"
+      required
+    >
+    </div>
+  
+    <!-- Extra details -->
+    <div class="user-form__extra-details" (click)="handleAddExtraDetails($event)">
+      <p #extraDetails class="extra-details__text">Extra details
+        <span *ngIf="isAddFormExtraDetailsOpen">&uarr;</span>   
+        <span *ngIf="!isAddFormExtraDetailsOpen">&darr;</span>
+      </p>
+   
+            <!-- Extra details -->
+  
+        <div *ngIf="isAddFormExtraDetailsOpen" class="extra-details__content">
+          <p>Please use a ',' for enumeration</p>
+          <div  class="input-container">
+            <label for="hobbies">Hobbies</label>
+            <input type="text" name="hobbies" id="hobies"
+              [(ngModel)]="userForm.hobbies"
+            >
+          </div>
+  
+          <div  class="input-container">
+            <label for="studies">Studies</label>
+            <input type="text" name="studies" id="studies"
+              [(ngModel)]="userForm.studies"
+            >
+          </div> 
+          <div  class="input-container">
+            <label for="competencies">Competencies</label>
+            <input type="text" name="competencies" id="competencies"
+              [(ngModel)]="userForm.competencies"
+              min="18"
+            >
+          </div> 
+  
+          <div>
+            <p class="experience__text" (click)="handleAddExperienceOpen()">
+              Experience +
+            </p>
+
+            <form #subform="ngForm">
+            <div class="experience-container" *ngIf="isAddExperienceOpen" >
+              <div  class="input-container input-container--sub-1">
+                <label for="job-title">Job title </label>
+                <input type="text" name="job-title" id="job-title"
+                  [(ngModel)]="experienceSubForm.jobTitle"
+                >
+              </div> 
+              <div  class="input-container input-container--sub-2">
+                <label for="years">Years </label> 
+                <input type="text" name="years" id="years"
+                  [(ngModel)]="experienceSubForm.years"
+                >
+              </div> 
+              <div  class="input-container input-container--sub-3">
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location"
+                  [(ngModel)]="experienceSubForm.location"
+                >
+              </div> 
+
+              <div class="experience__add-container">
+                <button (click)="handleAddExperience()"> Add </button>
+              </div>
+
+            </div>
+          </form>
+       
+
+ 
+          </div>
+  
+        </div>
+    </div>
+  
+    <div class="button-container">
+      <button [disabled]="!form.valid" class="submit-button">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+
+
+{{ form.value | json   }}
+<!-- {{ subform.value | json }} -->
