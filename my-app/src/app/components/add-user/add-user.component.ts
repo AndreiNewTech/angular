@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User } from '../users-details/types';
+import { UsersServiceService } from 'src/app/services/users-service.service';
 
 @Component({
   selector: 'app-add-user',
@@ -31,6 +32,20 @@ export class AddUserComponent {
     location: '',
   };
 
+  userService: UsersServiceService;
+
+  constructor(userService: UsersServiceService) {
+    this.userService = userService;
+  }
+
+  ngOnInit() {
+    // Initializam cu primul user
+    this.userService.getUsers().subscribe((users) => {
+      console.log(users);
+      this.users = users;
+    });
+  }
+
   handleSubmit(form: any) {
     const lastUserId = this.users.at(-1)?.id ?? 0;
     const id = lastUserId + 1;
@@ -40,7 +55,7 @@ export class AddUserComponent {
     const studiesList = this.userForm.studies.split(',');
     const competenciesList = this.userForm.competencies.split(',');
 
-    this.users.push({
+    const user = {
       id: id,
       ...this.userForm,
       age: age,
@@ -48,7 +63,19 @@ export class AddUserComponent {
       competencies: competenciesList,
       experience: [],
       hobbies: hobbiesList,
-    });
+    };
+    console.log(user);
+    this.userService.addUsers(user);
+
+    // this.users.push({
+    //   id: id,
+    //   ...this.userForm,
+    //   age: age,
+    //   studies: studiesList,
+    //   competencies: competenciesList,
+    //   experience: [],
+    //   hobbies: hobbiesList,
+    // });
 
     // Reset form
     this.userForm = {

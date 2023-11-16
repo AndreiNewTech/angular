@@ -1,0 +1,41 @@
+<p>reactive-forms works!</p>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="username">Username:</label>
+    <input id="username" formControlName="username">
+    <div *ngIf="f['username'].errors && f['username'].touched">
+      <span *ngIf="f['username'].errors['required']">Username is required.</span>
+      <span *ngIf="f['username'].errors['minlength']">Username must be at least 4 characters.</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="email">Email:</label>
+    <input id="email" formControlName="email">
+    <div *ngIf="f['email'].errors && f['email'].touched">
+      <span *ngIf="f['email'].errors['required']">Email is required.</span>
+      <span *ngIf="f['email'].errors['email']">Email must be a valid email address.</span>
+    </div>
+  </div>
+
+  <div formGroupName="address">
+    <div>
+      <label for="street">Street:</label>
+      <input id="street" formControlName="street">
+      <div *ngIf="f['address'].get('street')?.errors && f?.['address']?.get('street')?.touched">
+        <span *ngIf="f?.['address']?.get('street')?.errors?.['required']">Street is required.</span>
+      </div>
+
+      <label for="city">City:</label>
+      <input id="city" formControlName="city">
+
+      <label for="zip">Zip:</label>
+      <input id="zip" formControlName="zip">
+    </div>
+    <!-- Similar for 'city' and 'zip' -->
+  </div>
+
+  <button type="submit" [disabled]="!myForm.valid">Submit</button>
+
+  {{ f['controls'] | json}} hello
+</form>

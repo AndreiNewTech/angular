@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import type { User } from './types';
 import jsonval from './users.json';
+import { UsersServiceService } from 'src/app/services/users-service.service';
 
 @Component({
   selector: 'app-users-details',
@@ -14,6 +15,7 @@ export class UsersDetailsComponent implements OnInit {
   nameInputBlurred: boolean = false;
   addFormExtraDetails: boolean = false;
   addExperience: boolean = false;
+  usersService: UsersServiceService;
 
   @ViewChild('extraDetails') extraDetails: ElementRef | undefined;
 
@@ -29,24 +31,27 @@ export class UsersDetailsComponent implements OnInit {
     competencies: '',
   };
 
-  constructor() {
-    this.users = jsonval;
+  constructor(userService: UsersServiceService) {
+    this.usersService = userService;
   }
 
   ngOnChanges(ev: Object) {}
 
   ngDoCheck() {
-    console.log(this.userForm);
     const studiesList = this.userForm.studies.split(',');
-    console.log(studiesList);
   }
 
   ngOnInit() {
     // Initializam cu primul user
     this.selectedUser = this.users[0];
+    this.usersService.getUsers().subscribe((users) => {
+      console.log(users);
+      this.users = users;
+    });
   }
 
   handleSelectuserEvent(e: User) {
+    console.log(e);
     this.selectedUser = e;
   }
 
