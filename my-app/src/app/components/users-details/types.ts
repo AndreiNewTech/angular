@@ -17,4 +17,4 @@ interface User {
   competencies: string[];
 }
 
-export { User };
+export { User, UserExperience };

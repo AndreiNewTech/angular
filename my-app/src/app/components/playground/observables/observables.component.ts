@@ -23,6 +23,6 @@ import { observableBehaviour } from './observable';
 })
 export class ObservablesComponent {
   constructor() {
-    observableBehaviour();
+    // observableBehaviour();
   }
 }

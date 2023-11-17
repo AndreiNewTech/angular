@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { User } from '../users-details/types';
-import { UsersServiceService } from 'src/app/services/users-service.service';
+import { User, UserExperience } from '../users-details/types';
 
 @Component({
   selector: 'app-add-user',
@@ -8,12 +7,13 @@ import { UsersServiceService } from 'src/app/services/users-service.service';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent {
+  @ViewChild('extraDetails') extraDetails: ElementRef | undefined;
   nameInputBlurred: boolean = false;
   isAddFormExtraDetailsOpen: boolean = false;
   isAddExperienceOpen: boolean = false;
+  workExperienceList: UserExperience[] = [];
   users: User[] = [];
 
-  @ViewChild('extraDetails') extraDetails: ElementRef | undefined;
   userForm = {
     name: '',
     surname: '',
@@ -28,22 +28,12 @@ export class AddUserComponent {
 
   experienceSubForm = {
     jobTitle: '',
-    years: '',
+    years: 0,
     location: '',
   };
 
-  userService: UsersServiceService;
-
-  constructor(userService: UsersServiceService) {
-    this.userService = userService;
-  }
-
   ngOnInit() {
     // Initializam cu primul user
-    this.userService.getUsers().subscribe((users) => {
-      console.log(users);
-      this.users = users;
-    });
   }
 
   handleSubmit(form: any) {
@@ -61,21 +51,10 @@ export class AddUserComponent {
       age: age,
       studies: studiesList,
       competencies: competenciesList,
-      experience: [],
+      experience: this.workExperienceList,
       hobbies: hobbiesList,
     };
     console.log(user);
-    this.userService.addUsers(user);
-
-    // this.users.push({
-    //   id: id,
-    //   ...this.userForm,
-    //   age: age,
-    //   studies: studiesList,
-    //   competencies: competenciesList,
-    //   experience: [],
-    //   hobbies: hobbiesList,
-    // });
 
     // Reset form
     this.userForm = {
@@ -106,6 +85,17 @@ export class AddUserComponent {
   }
 
   handleAddExperience() {
-    console.log(this.experienceSubForm);
+    this.workExperienceList.push(this.experienceSubForm);
+    this.experienceSubForm = {
+      jobTitle: '',
+      years: 0,
+      location: '',
+    };
+  }
+
+  handleChipClick(ev: Event, experience: UserExperience) {
+    this.workExperienceList = this.workExperienceList.filter((exp) => {
+      return exp !== experience;
+    });
   }
 }
