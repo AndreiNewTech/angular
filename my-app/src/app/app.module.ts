@@ -10,7 +10,6 @@ import { UsersSelectComponent } from './components/users-details/users-select/us
 import { UserDetailsComponent } from './components/users-details/user-details/user-details.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
-import { ObservablesComponent } from './components/playground/observables/observables.component';
 import { ReactiveFormsComponent } from './components/playground/reactive-forms/reactive-forms.component';
 import { AddUserReactiveComponent } from './components/add-user-reactive/add-user-reactive.component';
 import { ReactiveFormComponent } from './components/playground/reactive-form/reactive-form.component';
@@ -24,7 +23,6 @@ import { ReactiveFormComponent } from './components/playground/reactive-form/rea
     UserDetailsComponent,
     NavbarComponent,
     AddUserComponent,
-    ObservablesComponent,
     ReactiveFormsComponent,
     AddUserReactiveComponent,
     ReactiveFormComponent,
