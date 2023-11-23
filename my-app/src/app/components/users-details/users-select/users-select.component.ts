@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import type { User } from './../types';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-users-select',
@@ -10,6 +11,12 @@ export class UsersSelectComponent {
   @Input() users: User[] = [];
   @Output() selectUserEvent = new EventEmitter();
   selectedUser: User | undefined;
+
+  constructor(public usersService: UsersService) {}
+
+  ngOnInit() {
+    this.selectedUser = this.usersService.users[0];
+  }
 
   handleUserClick(e: Event, userId: number) {
     this.selectedUser = this.users.find((user) => user.id === userId);

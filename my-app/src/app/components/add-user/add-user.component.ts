@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User, UserExperience } from '../users-details/types';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-add-user',
@@ -32,11 +33,14 @@ export class AddUserComponent {
     location: '',
   };
 
+  constructor(public usersService: UsersService) {}
+
   ngOnInit() {
+    this.users = this.usersService.users;
     // Initializam cu primul user
   }
 
-  handleSubmit(form: any) {
+  handleSubmit() {
     const lastUserId = this.users.at(-1)?.id ?? 0;
     const id = lastUserId + 1;
     const age = parseFloat(this.userForm.age);
@@ -54,7 +58,8 @@ export class AddUserComponent {
       experience: this.workExperienceList,
       hobbies: hobbiesList,
     };
-    console.log(user);
+
+    this.usersService.addUser(user);
 
     // Reset form
     this.userForm = {

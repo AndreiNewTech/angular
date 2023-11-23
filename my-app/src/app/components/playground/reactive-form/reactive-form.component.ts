@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CounterService } from '../counter/counter.service';
 
 @Component({
   selector: 'app-reactive-form',
@@ -7,6 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./reactive-form.component.scss'],
 })
 export class ReactiveFormComponent {
+  constructor(public counterService: CounterService) {}
+
   userForm = new FormGroup({
     name: new FormControl('Andrei', [
       Validators.required,

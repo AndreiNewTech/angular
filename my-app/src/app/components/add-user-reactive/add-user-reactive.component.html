@@ -1,6 +1,6 @@
  <!-- Create user form -->
  <div class="add-user-reactive">
-  <form class="user-form" [formGroup]="userFom"  action="">
+  <form class="user-form" [formGroup]="userForm"  action="">
     <div class="input-container">
       <label for="name">Name</label>
       <input type="text" name="name" id="name"
@@ -84,10 +84,14 @@
 
             <div class="experience__chips-container">
               <ul class="experience__chips">
-                <li *ngFor="let experience of experienceFormObjList.value; let ind = index" class="experience__chip">
-                  <span> {{ experience['jobTitle']  }} </span>
-                  <button type="button" (click)="handleChipClick($event, ind)">x</button>
-                </li> 
+                <ng-container *ngIf="experienceFormObjList.value[0]">
+                  <li *ngFor="let experience of experienceFormObjList.value; let ind = index" class="experience__chip">
+                    
+                    <span> {{ experience['jobTitle']  }} </span>
+                    <button type="button" (click)="handleChipClick($event, ind)">x</button>
+                  </li> 
+                </ng-container>
+     
               </ul>
             </div>
 

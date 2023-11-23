@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { User, UserExperience } from '../users-details/types';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-add-user-reactive',
@@ -13,7 +14,7 @@ export class AddUserReactiveComponent {
   isAddExperienceOpen: boolean = false;
   users: User[] = [];
 
-  userFom = new FormGroup({
+  userForm = new FormGroup({
     name: new FormControl('', Validators.required),
     surname: new FormControl('', Validators.required),
     address: new FormControl(),
@@ -30,56 +31,59 @@ export class AddUserReactiveComponent {
     }),
   });
 
+  constructor(public usersService: UsersService) {}
+
   ngOnInit() {
-    this.userFom.valueChanges.subscribe((el) => {
+    this.userForm.valueChanges.subscribe((el) => {
       console.log(el);
     });
-    console.log(this.userFom.controls.name);
 
-    console.log(this.userFom.get('experience'));
+    this.users = this.usersService.users;
   }
 
   get formObj() {
-    return this.userFom;
+    return this.userForm;
   }
 
   get experienceFormObj() {
-    return this.userFom.get('experience');
+    return this.userForm.get('experience');
   }
 
   get experienceFormObjList() {
-    return this.userFom.get('experience')?.get('experienceList') as FormArray;
+    console.log(this.userForm.get('experience')?.get('experienceList'));
+    return this.userForm.get('experience')?.get('experienceList') as FormArray;
   }
 
   handleSubmit() {
-    // const lastUserId = this.users.at(-1)?.id ?? 0;
-    // const id = lastUserId + 1;
-    // const age = parseFloat(this.userForm.age);
-    // const hobbiesList = this.userForm.hobbies.split(',');
-    // const studiesList = this.userForm.studies.split(',');
-    // const competenciesList = this.userForm.competencies.split(',');
-    // const user = {
-    //   id: id,
-    //   ...this.userForm,
-    //   age: age,
-    //   studies: studiesList,
-    //   competencies: competenciesList,
-    //   experience: this.workExperienceList,
-    //   hobbies: hobbiesList,
-    // };
-    // console.log(user);
+    console.log(this.userForm.value);
+    const lastUserId = this.users.at(-1)?.id ?? 0;
+    const id = lastUserId + 1;
+    const age = parseFloat(this.userForm.value.age ?? '0');
+    const hobbiesList = this.userForm.value.hobbies?.split(',');
+    const studiesList = this.userForm.value.studies?.split(',');
+    const competenciesList = this.userForm.value.competencies?.split(',');
+    const experienceList = this.userForm.value.experience?.experienceList;
+
+    const { name, surname, address, profession } = this.userForm.value;
+
+    const user = {
+      id,
+      name,
+      surname,
+      address,
+      profession,
+      age: age,
+      studies: studiesList,
+      competencies: competenciesList,
+      experience: experienceList,
+      hobbies: hobbiesList,
+    } as User;
+
+    this.usersService.addUser(user);
+
     // // Reset form
-    // this.userForm = {
-    //   name: '',
-    //   surname: '',
-    //   address: '',
-    //   age: '',
-    //   profession: '',
-    //   studies: '',
-    //   experience: [],
-    //   hobbies: '',
-    //   competencies: '',
-    // };
+    // this.userForm.get('experience')?.get('experienceList')?.reset();
+    this.userForm.reset();
   }
 
   handleAddExtraDetails(e: Event) {

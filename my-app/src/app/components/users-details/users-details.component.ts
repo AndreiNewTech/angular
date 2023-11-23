@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import type { User } from './types';
-import jsonval from './users.json';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-users-details',
@@ -14,6 +14,8 @@ export class UsersDetailsComponent implements OnInit {
   nameInputBlurred: boolean = false;
   addFormExtraDetails: boolean = false;
   addExperience: boolean = false;
+
+  constructor(public usersService: UsersService) {}
 
   @ViewChild('extraDetails') extraDetails: ElementRef | undefined;
 
@@ -37,12 +39,12 @@ export class UsersDetailsComponent implements OnInit {
 
   ngOnInit() {
     // Initializam cu primul user
+    this.users = this.usersService.users;
     this.selectedUser = this.users[0];
-    this.users = jsonval;
+    console.log(this.selectedUser);
   }
 
   handleSelectuserEvent(e: User) {
-    console.log(e);
     this.selectedUser = e;
   }
 
