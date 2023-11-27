@@ -16,6 +16,7 @@ import { ReactiveFormComponent } from './components/playground/reactive-form/rea
 import { CounterComponent } from './components/playground/counter/counter.component';
 import { AddCountComponent } from './components/playground/counter/add-count/add-count.component';
 import { SubtractCountComponent } from './components/playground/counter/subtract-count/subtract-count.component';
+import { ObservablesComponent } from './components/playground/observables/observables/observables.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { SubtractCountComponent } from './components/playground/counter/subtract
     CounterComponent,
     AddCountComponent,
     SubtractCountComponent,
+    ObservablesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],

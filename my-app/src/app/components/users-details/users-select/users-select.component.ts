@@ -15,7 +15,10 @@ export class UsersSelectComponent {
   constructor(public usersService: UsersService) {}
 
   ngOnInit() {
-    this.selectedUser = this.usersService.users[0];
+    this.usersService.users.subscribe((val) => {
+      this.users = val;
+      this.selectedUser = val[0];
+    });
   }
 
   handleUserClick(e: Event, userId: number) {

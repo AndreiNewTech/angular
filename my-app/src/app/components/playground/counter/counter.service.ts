@@ -6,7 +6,6 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class CounterService {
   count = new BehaviorSubject<number>(0);
-  localCount = 0;
 
   get countVal() {
     return this.count;

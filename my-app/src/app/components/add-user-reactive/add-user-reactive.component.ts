@@ -37,8 +37,6 @@ export class AddUserReactiveComponent {
     this.userForm.valueChanges.subscribe((el) => {
       console.log(el);
     });
-
-    this.users = this.usersService.users;
   }
 
   get formObj() {

@@ -39,9 +39,10 @@ export class UsersDetailsComponent implements OnInit {
 
   ngOnInit() {
     // Initializam cu primul user
-    this.users = this.usersService.users;
-    this.selectedUser = this.users[0];
-    console.log(this.selectedUser);
+    this.usersService.users.subscribe((val) => {
+      this.users = val;
+      this.selectedUser = this.users[0];
+    });
   }
 
   handleSelectuserEvent(e: User) {

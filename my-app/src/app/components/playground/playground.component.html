@@ -5,7 +5,7 @@
 
 <!--  NgIf NgFor NgSwitch -->
 
-<h3 class="title">Ng If </h3>
+<!-- <h3 class="title">Ng If </h3>
 <div *ngIf="isDivVisible">
   <p>My first structural directive paragrah</p>
 </div>
@@ -49,7 +49,7 @@
 <button (click)="randeazaSwtichPisicile()">Switch pisici</button>
 
 
-<h3 class="title"> NG Container and template </h3>
+<h3 class="title"> NG Container and template </h3> -->
 
 <!-- Ng container -->
 <ng-container *ngIf="true">
@@ -59,7 +59,7 @@
 </ng-container>
 <!-- Ng template -->
 
-
+<!-- 
 <ng-container *ngIf="true; else templ">
   <div> Container false and template true</div>
 </ng-container>
@@ -68,10 +68,10 @@
   <div>
     My first ng template. Container true and template default false
   </div>
-</ng-template>
+</ng-template> -->
 
 
-<h3 class="title"> Attribute Directives </h3>
+<!-- <h3 class="title"> Attribute Directives </h3>
 <p [title]="'title'" [attr.data-sectionvalue]="'value'" [ngClass]="1 !== 1 ? 'red' : 'green' ">Heading 1</p>
 
 
@@ -96,14 +96,14 @@
 
   <h3>Output</h3>
   <button (click)="handleSendDataToParentClick()"> Send data to parent </button>
-</div>
+</div> -->
 
 
 
 <!-- Forms -->
 <h2> Forms </h2>
 <!-- Template driven forms -->
-<h3  class="title"> Template driven forms </h3>
+<!-- <h3  class="title"> Template driven forms </h3>
 <form action="" #form="ngForm" (submit)="handleSubmit(form.value)" class="template-form">
   <div>
     <label for="name">Name</label>
@@ -141,19 +141,21 @@
   
 
   <button> Submit </button>
-</form>
+</form> -->
 
 
 <!-- Reactive Forms -->
   
 
-<h3  class="title"> Reactive forms </h3>
+<!-- <h3  class="title"> Reactive forms </h3>
 <app-reactive-form></app-reactive-form>
 
 
 <h3 class="title">Service Counter Example </h3>
-<app-counter></app-counter>
-
-
+<app-counter></app-counter> -->
 
 <!-- Reactive forms -->
+
+
+<!-- Observables playground -->
+<app-observables></app-observables>

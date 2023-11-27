@@ -36,7 +36,9 @@ export class AddUserComponent {
   constructor(public usersService: UsersService) {}
 
   ngOnInit() {
-    this.users = this.usersService.users;
+    this.usersService.users.subscribe((val) => {
+      this.users = val;
+    });
     // Initializam cu primul user
   }
 
