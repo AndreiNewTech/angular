@@ -1,0 +1,14 @@
+
+<div class="users-dashboard">
+  <h1>Shopping Users</h1>
+
+  <ul class="users-list">
+    <li *ngFor="let user of users">
+      <a  [routerLink]="['/user', user?.id]">
+        <span>{{ user?.name }}</span>
+      </a>
+
+    </li>
+  </ul>
+
+</div>
