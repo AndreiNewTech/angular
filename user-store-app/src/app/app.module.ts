@@ -7,6 +7,11 @@ import { UsersDashboardComponent } from './components/containers/users-dashboard
 import { UserDashboardComponent } from './components/containers/user-dashboard/user-dashboard.component';
 import { NavigationComponent } from './components/common/navigation/navigation.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoaderComponent } from './components/common/loader/loader.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -14,8 +19,17 @@ import { HttpClientModule } from '@angular/common/http';
     UsersDashboardComponent,
     UserDashboardComponent,
     NavigationComponent,
+    LoaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatTableModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

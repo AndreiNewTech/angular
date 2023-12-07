@@ -20,7 +20,6 @@ const getLimitedUsersUrl = (limit: number) =>
 })
 export class UsersService {
   _users: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
-  _currentUser = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(private httpClient: HttpClient) {
     const URL = getLimitedUsersUrl(10);
@@ -35,20 +34,14 @@ export class UsersService {
         age: user.age,
         phone: user.phone,
       }));
-      this._users.next(newUsers);
+
+      setTimeout(() => {
+        this._users.next(newUsers);
+      }, 2000);
     });
   }
 
   get users() {
     return this._users.asObservable();
-  }
-
-  getUser(id: number) {
-    this.users.subscribe((val) => {
-      const user = val.find((user) => user.id === id);
-      this._currentUser.next(user);
-    });
-
-    return this._currentUser.asObservable();
   }
 }

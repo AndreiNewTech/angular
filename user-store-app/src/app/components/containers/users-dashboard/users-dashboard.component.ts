@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { UsersService } from 'src/app/services/users.service';
-import type { User } from '../../../services/users.service';
+import { UsersService } from 'src/app/services/users/users.service';
+import type { User } from '../../../services/users/users.service';
 
 @Component({
   selector: 'app-users-dashboard',
