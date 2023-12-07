@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 const getLimitedProductsUrl = (limit: number, skip: number) =>
   `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
@@ -10,9 +10,7 @@ const getLimitedProductsUrl = (limit: number, skip: number) =>
 })
 export class ProductsService {
   _products = new Subject<[]>();
-  constructor(private http: HttpClient) {
-    // this.getProductUsers(10, 10);
-  }
+  constructor(private http: HttpClient) {}
 
   get products() {
     return this._products.asObservable();
@@ -20,7 +18,6 @@ export class ProductsService {
 
   getProductUsers(limit: number, skip: number) {
     this.http.get(getLimitedProductsUrl(10, skip)).subscribe((val: any) => {
-      console.log(val);
       this._products.next(val.products);
     });
   }

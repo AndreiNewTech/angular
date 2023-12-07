@@ -1,0 +1,12 @@
+<div class="user-comments">
+
+  
+  <mat-chip-listbox aria-label="Dog selection">
+    <mat-chip *ngFor="let comment of comments">
+      <img matChipAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu"/>
+      {{ comment }}
+    </mat-chip>
+
+  </mat-chip-listbox>
+
+</div>

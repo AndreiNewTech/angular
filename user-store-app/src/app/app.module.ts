@@ -12,7 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
-
+import { UserProductsComponent } from './components/containers/user-dashboard/user-products/user-products.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { UserCommentsComponent } from './components/containers/user-dashboard/user-comments/user-comments.component';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +23,8 @@ import { MatTableModule } from '@angular/material/table';
     UserDashboardComponent,
     NavigationComponent,
     LoaderComponent,
+    UserProductsComponent,
+    UserCommentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,6 +34,8 @@ import { MatTableModule } from '@angular/material/table';
     MatProgressSpinnerModule,
     MatRadioModule,
     MatTableModule,
+    MatTabsModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

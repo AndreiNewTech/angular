@@ -1,6 +1,10 @@
 <div class="user-dashboard">
+  
+  <p>
 
-  <!-- <app-loader *ngIf="!user?.id"></app-loader> -->
+    <a mat-button routerLink="" target=""><span>&#x2190;</span>Back</a>
+  </p>
+
 
   <div class="spinner-container">
     <mat-spinner  *ngIf="!user?.id" [diameter]="60"></mat-spinner>
@@ -17,7 +21,22 @@
     <h3>Age: <span>{{ user?.age}}</span></h3>
     <h3>Email: <span>{{ user?.email}}</span></h3>
     <h3>Phone: <span>{{ user?.phone}}</span></h3>
+
+    <mat-tab-group (selectedTabChange)="handleTabChange($event)">
+      <mat-tab 
+        label="Products"
+        >
+      </mat-tab>
+      <mat-tab 
+        label="Comments"
+        >
+      </mat-tab>
+    </mat-tab-group>
+
+    <router-outlet></router-outlet>
   </div>
 </div>
+
+
 
 
