@@ -5,7 +5,7 @@
 
 <!--  NgIf NgFor NgSwitch -->
 
-<!-- <h3 class="title">Ng If </h3>
+<h3 class="title">Ng If </h3>
 <div *ngIf="isDivVisible">
   <p>My first structural directive paragrah</p>
 </div>
@@ -49,7 +49,7 @@
 <button (click)="randeazaSwtichPisicile()">Switch pisici</button>
 
 
-<h3 class="title"> NG Container and template </h3> -->
+<h3 class="title"> NG Container and template </h3>
 
 <!-- Ng container -->
 <ng-container *ngIf="true">
@@ -59,7 +59,6 @@
 </ng-container>
 <!-- Ng template -->
 
-<!-- 
 <ng-container *ngIf="true; else templ">
   <div> Container false and template true</div>
 </ng-container>
@@ -68,10 +67,10 @@
   <div>
     My first ng template. Container true and template default false
   </div>
-</ng-template> -->
+</ng-template>
 
 
-<!-- <h3 class="title"> Attribute Directives </h3>
+<h3 class="title"> Attribute Directives </h3>
 <p [title]="'title'" [attr.data-sectionvalue]="'value'" [ngClass]="1 !== 1 ? 'red' : 'green' ">Heading 1</p>
 
 
@@ -96,14 +95,14 @@
 
   <h3>Output</h3>
   <button (click)="handleSendDataToParentClick()"> Send data to parent </button>
-</div> -->
+</div>
 
 
 
 <!-- Forms -->
 <h2> Forms </h2>
 <!-- Template driven forms -->
-<!-- <h3  class="title"> Template driven forms </h3>
+<h3  class="title"> Template driven forms </h3>
 <form action="" #form="ngForm" (submit)="handleSubmit(form.value)" class="template-form">
   <div>
     <label for="name">Name</label>
@@ -141,21 +140,65 @@
   
 
   <button> Submit </button>
-</form> -->
+</form>
 
 
 <!-- Reactive Forms -->
   
 
-<!-- <h3  class="title"> Reactive forms </h3>
+<h3  class="title"> Reactive forms </h3>
 <app-reactive-form></app-reactive-form>
 
 
 <h3 class="title">Service Counter Example </h3>
-<app-counter></app-counter> -->
+<app-counter></app-counter>
 
 <!-- Reactive forms -->
 
 
 <!-- Observables playground -->
 <app-observables></app-observables>
+
+
+<!-- Pipes -->
+
+<h3 class="title">{{ pipeTitleText | uppercase }} </h3>
+
+<p>{{'Lowercase Values' | lowercase }}</p>
+
+<!-- Json pipe -->
+<h3 class="title">{{ {text: 'hello'} | json }} </h3>
+
+
+<!-- Date pipe -->
+<p>My birthday is {{myBirthday | date}}</p>
+<p>My birthday is {{myBirthday | date:'shortDate'}}</p>
+<p  [appStyle]="'green'">My birthday is{{ myBirthday | date:"dd MMMM yyyy" }} </p>
+{{ myBirthday | date:"dd MMMM yyyy" }} 
+
+
+<!-- Decimal Pipe -->
+
+<p> {{ 100000 | number }} </p>
+{{ 4.5555 | truncate:3 }}
+
+<p>{{pi}}</p>
+<p>{{pi | number: '4.1-6'  }}</p>
+
+
+
+<!-- Currency Pipe -->
+<p>The price is {{price | currency:"EUR"}}</p>
+<p>The price is {{price | currency:"GBP" :'code'}}</p>
+<p [appStyle]="'green'">The price is {{price | currency:"RON" : 'code':'1.3-3'}}</p>
+
+<!-- Slice -->
+<p>{{'Foo&Bar' | slice:2:5}}</p>
+
+<p>{{'Reverse this please' | reverse}}</p>
+
+<!--Custom Directive -->
+
+<h3 class="title">{{ 'Custom Directive' | uppercase }} </h3>
+
+<p [appStyle]="'yellow'">This is invalid</p>

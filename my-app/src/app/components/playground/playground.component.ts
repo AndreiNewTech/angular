@@ -25,8 +25,13 @@ export interface Product {
   styleUrls: ['./playground.component.scss'],
 })
 export class PlaygroundComponent {
+  pipeTitleText = 'Pipes';
+
   @Input() childInputValue = '';
   @Output() childEventOutputToParent = new EventEmitter<string>();
+  pi: number = 3.14159265359;
+  myBirthday = new Date(1988, 3, 15);
+  price = 101;
 
   registerForm = {
     name: '',

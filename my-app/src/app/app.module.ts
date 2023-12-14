@@ -17,6 +17,9 @@ import { CounterComponent } from './components/playground/counter/counter.compon
 import { AddCountComponent } from './components/playground/counter/add-count/add-count.component';
 import { SubtractCountComponent } from './components/playground/counter/subtract-count/subtract-count.component';
 import { ObservablesComponent } from './components/playground/observables/observables/observables.component';
+import { ReversePipe } from './components/playground/pipes/reverse.pipe';
+import { TruncatePipe } from './components/playground/pipes/truncate.pipe';
+import { StyleDirective } from './components/playground/directives/style.directive';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { ObservablesComponent } from './components/playground/observables/observ
     AddCountComponent,
     SubtractCountComponent,
     ObservablesComponent,
+    ReversePipe,
+    TruncatePipe,
+    StyleDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
