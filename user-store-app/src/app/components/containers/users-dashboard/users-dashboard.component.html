@@ -12,8 +12,7 @@
       <a  [routerLink]="['/user', user?.id]">
         <span>{{ user?.name }}</span>
       </a>
-
     </li>
   </ul>
-
+  <button mat-button (click)="openDialog()">Launch dialog</button>
 </div>

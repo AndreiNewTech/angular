@@ -16,6 +16,10 @@ import { UserProductsComponent } from './components/containers/user-dashboard/us
 import { MatTabsModule } from '@angular/material/tabs';
 import { UserCommentsComponent } from './components/containers/user-dashboard/user-comments/user-comments.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +40,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTableModule,
     MatTabsModule,
     MatChipsModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

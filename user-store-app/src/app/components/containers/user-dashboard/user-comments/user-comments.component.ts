@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { CommentsService } from 'src/app/services/comments/comments.service';
 
 @Component({
@@ -8,13 +9,17 @@ import { CommentsService } from 'src/app/services/comments/comments.service';
 })
 export class UserCommentsComponent {
   comments: String[] = [];
+  subscription: Subscription | null = null;
 
   constructor(private commentsService: CommentsService) {
     this.commentsService.comments.subscribe((val: any) => {
-      console.log(val);
       this.comments = val.map((comment: any) => comment.body);
     });
 
     this.commentsService.getUserComments(20);
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 }

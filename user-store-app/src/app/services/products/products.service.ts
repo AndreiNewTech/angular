@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 const getLimitedProductsUrl = (limit: number, skip: number) =>
   `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
@@ -10,6 +10,7 @@ const getLimitedProductsUrl = (limit: number, skip: number) =>
 })
 export class ProductsService {
   _products = new Subject<[]>();
+
   constructor(private http: HttpClient) {}
 
   get products() {
