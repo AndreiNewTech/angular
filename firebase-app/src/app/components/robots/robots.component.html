@@ -16,8 +16,10 @@
 
 <ul>
   <li *ngFor="let robot of robots">
-    {{ robot.nume }}
-
+    <div>Nume:{{ robot.nume }}</div>
+    <div [ngStyle]="{'background': robot.culoare}"> Culoare:{{ robot.culoare }}</div>
+    <div>Varsta: {{ robot.varsta }}</div>
     <button (click)="handleDelete(robot.id)"> X </button>
+    <button (click)="handleModify(robot.id)"> Modify </button>
   </li>
 </ul>

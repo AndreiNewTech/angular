@@ -29,8 +29,8 @@ export class RobotsComponent {
   }
 
   ngOnInit() {
-    this.robotsService.getRobotsCollection().then((val) => {
-      this.robots = val;
+    this.robotsService.getRobotsCollection().subscribe((robots) => {
+      this.robots = [...robots];
     });
   }
 
@@ -44,5 +44,9 @@ export class RobotsComponent {
 
   handleDelete(robotId: string) {
     this.robotsService.deleteRobot(robotId);
+  }
+
+  handleModify(robotId: string) {
+    this.robotsService.updateRobot(robotId);
   }
 }
