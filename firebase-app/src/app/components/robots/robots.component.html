@@ -1,0 +1,23 @@
+<p>robots2 works!</p>
+
+<div class="container">
+  <h1> add robot </h1>
+  <form (ngSubmit)="addRobot(nume, culoare, varsta)">
+      <p> nume </p>
+      <input name="nume" [(ngModel)]="nume">
+      <p> culoare </p>
+      <input name="culoare" [(ngModel)]="culoare">
+      <p> varsta </p>
+      <input   name="varsta" [(ngModel)]="varsta">
+      <button type="submit"> submit </button>
+  </form>
+</div>
+
+
+<ul>
+  <li *ngFor="let robot of robots">
+    {{ robot.nume }}
+
+    <button (click)="handleDelete(robot.id)"> X </button>
+  </li>
+</ul>
