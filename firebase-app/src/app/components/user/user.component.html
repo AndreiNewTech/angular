@@ -1,0 +1,37 @@
+
+<p>Hello Logged Uesrs  {{ user?.name }} </p>
+
+<div>
+  <h2>Register User</h2>
+  <form action="" (submit)="handleSubmitRegister(registerEmail, registerPass, registerAge)">
+    <div>  
+      <label for="registerEmail">Email</label>
+      <input type="email" name="registerEmail" id="registerEmail" [(ngModel)]="registerEmail"></div>
+    <div>  
+      <label for="registerPass">Password</label>
+      <input type="password" name="registerPass" id="registerPass" [(ngModel)]="registerPass"></div>
+    <div>
+      <label for="registerAge">Age</label>
+      <input type="number" name="registerAge" id="registerAge" [(ngModel)]="registerAge">
+    </div>
+  
+    <p *ngIf="userEmailAlreadyExists">User already exists</p>
+    <button>Register</button>
+  </form>
+</div>
+
+
+<div>
+  <h2>Login User</h2>
+  <form action="" (submit)="handleSubmitLogin(loginEmail, loginPass)">
+    <div>
+      <label for="loginEmail">Email</label>
+      <input  type="email" name="loginEmail" id="loginEmail" [(ngModel)]="loginEmail"></div>
+    <div>  
+      <label for="loginPass">Password</label>
+      <input type="password" name="loginPass" id="loginPass" [(ngModel)]="loginPass">
+    </div>
+  
+    <button>Login</button>
+  </form>
+</div>

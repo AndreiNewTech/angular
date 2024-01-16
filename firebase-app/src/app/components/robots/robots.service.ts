@@ -8,14 +8,13 @@ import {
   getDoc,
   where,
   deleteDoc,
-  onSnapshot,
   updateDoc,
   doc,
   collectionChanges,
   orderBy,
 } from '@angular/fire/firestore';
 import { WhereFilterOp } from 'firebase/firestore';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
 
 interface WhereClauseI {
   rightVal?: string;
@@ -33,16 +32,13 @@ interface OrderByI {
 })
 export class RobotsService {
   robotsObs$ = new BehaviorSubject<any>([]);
+  collectionRef = collection(this.firestore, 'roboti');
 
   constructor(public firestore: Firestore) {
-    // const queryRef = query(collection(this.firestore, 'roboti'));
-    // collectionChanges(collection(this.firestore, 'roboti'))
-    //   .pipe(
-    //     map((val) => {
-    //       console.log(val);
-    //     })
-    //   )
-    //   .subscribe((val) => console.log(val));
+    const queryRef = query(collection(this.firestore, 'roboti'));
+    // console.log(queryRef);
+    // console.log(collectionChanges(queryRef));
+    // collectionChanges(this.collectionRef).subscribe((val) => console.log(val));
   }
 
   // CRUD
@@ -59,7 +55,7 @@ export class RobotsService {
   // CREATE
   addRobot(robot: any) {
     try {
-      addDoc(collection(this.firestore, 'roboti'), robot).then((docRef) => {
+      addDoc(this.collectionRef, robot).then((docRef) => {
         getDoc(docRef).then((docRealValue) => {
           this.robotsObs$.next([
             ...this.robotsObs$.getValue(),
@@ -146,5 +142,14 @@ export class RobotsService {
     });
 
     return genericList;
+  }
+
+  getRobotsChanges() {
+    return collectionChanges(query(collection(this.firestore, 'roboti'))).pipe(
+      switchMap(async () => {
+        const val = await this.getDocsList('roboti');
+        return val;
+      })
+    );
   }
 }

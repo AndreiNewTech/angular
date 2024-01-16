@@ -32,6 +32,10 @@ export class RobotsComponent {
     this.robotsService.getRobotsCollection().subscribe((robots) => {
       this.robots = [...robots];
     });
+
+    this.robotsService.getRobotsChanges().subscribe((el) => {
+      console.log(el);
+    });
   }
 
   addRobot(nume: string, culoare: string, varsta: string) {
