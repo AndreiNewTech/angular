@@ -1,0 +1,19 @@
+
+<div>
+  <h2>Register User</h2>
+  <form action="" (submit)="handleSubmitRegister(registerEmail, registerPass, registerAge)">
+    <div>  
+      <label for="registerEmail">Email</label>
+      <input type="email" name="registerEmail" id="registerEmail" [(ngModel)]="registerEmail"></div>
+    <div>  
+      <label for="registerPass">Password</label>
+      <input type="password" name="registerPass" id="registerPass" [(ngModel)]="registerPass"></div>
+    <div>
+      <label for="registerAge">Age</label>
+      <input type="number" name="registerAge" id="registerAge" [(ngModel)]="registerAge">
+    </div>
+  
+    <p *ngIf="userEmailAlreadyExists">User already exists</p>
+    <button>Register</button>
+  </form>
+</div>

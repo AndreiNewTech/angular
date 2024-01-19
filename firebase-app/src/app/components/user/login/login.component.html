@@ -1,0 +1,15 @@
+<p>login works!</p>
+<div>
+  <h2>Login User</h2>
+  <form action="" (submit)="handleSubmitLogin(loginEmail, loginPass)">
+    <div>
+      <label for="loginEmail">Email</label>
+      <input  type="email" name="loginEmail" id="loginEmail" [(ngModel)]="loginEmail"></div>
+    <div>  
+      <label for="loginPass">Password</label>
+      <input type="password" name="loginPass" id="loginPass" [(ngModel)]="loginPass">
+    </div>
+  
+    <button>Login</button>
+  </form>
+</div>

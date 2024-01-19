@@ -14,7 +14,8 @@ import {
   orderBy,
 } from '@angular/fire/firestore';
 import { WhereFilterOp } from 'firebase/firestore';
-import { BehaviorSubject, Observable, map, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
+import { UserService } from '../user/user.service';
 
 interface WhereClauseI {
   rightVal?: string;
@@ -31,37 +32,26 @@ interface OrderByI {
   providedIn: 'root',
 })
 export class RobotsService {
-  robotsObs$ = new BehaviorSubject<any>([]);
   collectionRef = collection(this.firestore, 'roboti');
 
-  constructor(public firestore: Firestore) {
-    const queryRef = query(collection(this.firestore, 'roboti'));
-    // console.log(queryRef);
-    // console.log(collectionChanges(queryRef));
-    // collectionChanges(this.collectionRef).subscribe((val) => console.log(val));
-  }
+  constructor(public firestore: Firestore, public userService: UserService) {}
 
   // CRUD
-
-  //  READ
-  getRobotsCollection(): Observable<any> {
-    this.getDocsList('roboti').then((robotiList) => {
-      this.robotsObs$.next(robotiList);
-    });
-
-    return this.robotsObs$.asObservable();
+  // READ and Listen
+  getRobotsChanges() {
+    return collectionChanges(query(collection(this.firestore, 'roboti'))).pipe(
+      switchMap(async () => {
+        const val = await this.getUserDocsList('roboti');
+        return val;
+      })
+    );
   }
 
   // CREATE
   addRobot(robot: any) {
     try {
       addDoc(this.collectionRef, robot).then((docRef) => {
-        getDoc(docRef).then((docRealValue) => {
-          this.robotsObs$.next([
-            ...this.robotsObs$.getValue(),
-            docRealValue.data(),
-          ]);
-        });
+        console.log('Robot added');
       });
     } catch (error) {
       console.error('Problem adding Doc');
@@ -73,11 +63,8 @@ export class RobotsService {
     const docRef = doc(this.firestore, 'roboti', robotId);
 
     try {
-      updateDoc(docRef, { nume: 'RobotB' }).then(() => {
-        // console.log(doc);
-        this.getDocsList('roboti').then((robotiList) => {
-          this.robotsObs$.next(robotiList);
-        });
+      updateDoc(docRef, { nume: 'RobotX' }).then(() => {
+        console.log('Robot updated');
       });
     } catch (error) {
       console.error('Problem updating doc');
@@ -89,22 +76,28 @@ export class RobotsService {
     try {
       const docRef = doc(this.firestore, 'roboti', robotId);
       deleteDoc(docRef).then(() => {
-        this.getDocsList('roboti').then((robotiList) => {
-          this.robotsObs$.next(robotiList);
-        });
+        console.log('Doc deleted');
       });
     } catch {
       console.error('Problem deleting doc');
     }
   }
 
-  private async getDocsList(
+  private async getUserDocsList(
     listIdName: string,
     whereClauseObj: WhereClauseI = {},
     orderByObj: OrderByI = {}
   ) {
+    const user = this.userService.getUser();
+    const userId = user?.uid || '';
+
+    if (!userId) throw new Error('User not logged');
+
     // Initialize the base query with the collection
-    let queryRef = query(collection(this.firestore, listIdName));
+    let queryRef = query(
+      collection(this.firestore, listIdName),
+      where('userId', '==', userId)
+    );
 
     // Add 'where' clause if the necessary properties exist
     if (
@@ -142,14 +135,5 @@ export class RobotsService {
     });
 
     return genericList;
-  }
-
-  getRobotsChanges() {
-    return collectionChanges(query(collection(this.firestore, 'roboti'))).pipe(
-      switchMap(async () => {
-        const val = await this.getDocsList('roboti');
-        return val;
-      })
-    );
   }
 }

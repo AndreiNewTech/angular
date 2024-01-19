@@ -41,9 +41,19 @@ export class UserService {
     }
   }
 
-  signin(email: string, pass: string) {
-    signInWithEmailAndPassword(this.auth, email, pass).then((val) => {
-      console.log(val);
-    });
+  async signin(email: string, pass: string) {
+    return signInWithEmailAndPassword(this.auth, email, pass);
+  }
+
+  async logout() {
+    return this.auth.signOut();
+  }
+
+  getUser() {
+    return this.auth.currentUser;
+  }
+
+  onUserStateChanged(fn: any) {
+    return this.auth.onAuthStateChanged(fn);
   }
 }

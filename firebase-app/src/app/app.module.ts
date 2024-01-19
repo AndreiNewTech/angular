@@ -9,9 +9,12 @@ import { environment } from '../enviroments/local';
 import { RobotsComponent } from './components/robots/robots.component';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './components/user/user.component';
+import { RegisterComponent } from './components/user/register/register.component';
+import { LoginComponent } from './components/user/login/login.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 
 @NgModule({
-  declarations: [AppComponent, RobotsComponent, UserComponent],
+  declarations: [AppComponent, RobotsComponent, UserComponent, RegisterComponent, LoginComponent, NavigationComponent],
   imports: [
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),

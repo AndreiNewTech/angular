@@ -8,6 +8,9 @@ import {
   where,
 } from '@angular/fire/firestore';
 import { RobotsService } from './robots.service';
+import { Auth } from '@angular/fire/auth';
+import { UserService } from '../user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-robots',
@@ -21,29 +24,39 @@ export class RobotsComponent {
   culoare: string = '';
   varsta: string = '';
 
+  userEmail: string = '';
+
   constructor(
     public firestore: Firestore,
-    public robotsService: RobotsService
+    public robotsService: RobotsService,
+    public auth: Auth,
+    public userService: UserService,
+    public router: Router
   ) {
     // Read
   }
 
   ngOnInit() {
-    this.robotsService.getRobotsCollection().subscribe((robots) => {
+    this.robotsService.getRobotsChanges().subscribe((robots) => {
       this.robots = [...robots];
     });
 
-    this.robotsService.getRobotsChanges().subscribe((el) => {
-      console.log(el);
+    this.auth.onAuthStateChanged(() => {
+      if (this.auth.currentUser) {
+        this.userEmail = this.auth.currentUser?.email || '';
+      }
     });
   }
 
   addRobot(nume: string, culoare: string, varsta: string) {
-    this.robotsService.addRobot({
-      nume,
-      culoare,
-      varsta: parseInt(varsta),
-    });
+    if (this.auth.currentUser) {
+      this.robotsService.addRobot({
+        nume,
+        culoare,
+        varsta: parseInt(varsta),
+        userId: this.auth.currentUser?.uid,
+      });
+    }
   }
 
   handleDelete(robotId: string) {

@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  background-color: darkgray;
+  ul {
+    display: flex;
+    gap: 20px;
+    padding-right:20px;
+
+    li {
+      list-style-type: none;
+    }
+
+    li a:hover {
+      color: white;
+      cursor: pointer;
+      
+    }
+  }
+
+}
