@@ -1,21 +1,33 @@
 .navbar {
+  background-color: #007bff; /* Navbar background color */
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: flex-end;
-  background-color: darkgray;
-  ul {
-    display: flex;
-    gap: 20px;
-    padding-right:20px;
+  justify-content: space-between;
+}
 
-    li {
-      list-style-type: none;
-    }
+/* Styling for the navbar list */
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
 
-    li a:hover {
-      color: white;
-      cursor: pointer;
-      
-    }
-  }
+/* Styling for each list item */
+.navbar li {
+  margin-right: 20px; /* Spacing between items */
+}
 
+/* Styling for navbar links */
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.navbar a:hover {
+  text-decoration: underline; /* Underline on hover for better user experience */
 }

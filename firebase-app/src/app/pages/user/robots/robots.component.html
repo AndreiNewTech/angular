@@ -1,0 +1,38 @@
+
+<div class="robots">
+  <h1> Lista roboti </h1>
+  <div class="table">
+    <div class="table-row header">
+      <div class="table-cell">Nume</div>
+      <div class="table-cell">Culoare</div>
+      <div class="table-cell">Varsta</div>
+      <div class="table-cell">Autonomie (km)</div>
+      <div class="table-cell">Viteza (km/h)</div>
+      <div class="table-cell">Actions</div>
+    </div>
+    <div class="table-row" *ngFor="let robot of robots">
+      <div class="table-cell">{{ robot.name }}</div>
+      <div class="table-cell">{{ robot.color }}</div>
+      <div class="table-cell">{{ robot.age }}</div>
+      <div class="table-cell">{{ robot.autonomy }}</div>
+      <div class="table-cell">{{ robot.speed }}</div>
+      <div class="table-cell">
+        <button (click)="handleDelete(robot.id)" class="delete-btn">Delete</button>
+        <button (click)="handleEdit(robot.id)" class="edit-btn">Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- <ul>
+  <li *ngFor="let robot of robots">
+    <div>Nume:{{ robot.nume }}</div>
+    <div [ngStyle]="{'background': robot.culoare}"> Culoare:{{ robot.culoare }}</div>
+    <div>Varsta: {{ robot.varsta }}</div>
+    <button (click)="handleDelete(robot.id)"> X </button>
+    <button (click)="handleModify(robot.id)"> Modify </button>
+  </li>
+</ul> -->

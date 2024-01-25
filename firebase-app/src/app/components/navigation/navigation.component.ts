@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { UserService } from '../user/user.service';
+import { UserService } from '../../services/auth/user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -10,14 +9,28 @@ import { UserService } from '../user/user.service';
 })
 export class NavigationComponent {
   isUserLogged: boolean = false;
+  userName = '';
   constructor(public userService: UserService, public router: Router) {
-    this.userService.onUserStateChanged(() => {
-      if (this.userService.getUser()) {
-        this.isUserLogged = true;
-      } else {
+    this.userService
+      .getUser()
+      .then((val: any) => {
+        this.userService
+          .getUserFullDetails(val.uid)
+          .then((userDetails: any) => {
+            console.log(userDetails);
+            this.userName = this.createUserName(
+              userDetails.surname,
+              userDetails.name
+            );
+          });
+
+        this.isUserLogged = Boolean(val);
+        console.log(val, 'Val');
+      })
+      .catch(() => {
         this.isUserLogged = false;
-      }
-    });
+        console.log('Catch');
+      });
   }
 
   handleLogout() {
@@ -25,5 +38,9 @@ export class NavigationComponent {
       this.router.navigate(['login']);
       this.isUserLogged = false;
     });
+  }
+
+  private createUserName(name: string, surname: string) {
+    return name + surname[0];
   }
 }

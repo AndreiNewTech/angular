@@ -3,8 +3,18 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
 } from '@angular/fire/auth';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+
+export interface UserForm {
+  name: string;
+  surname: string;
+  email: string;
+  pass: string;
+  age: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -12,17 +22,17 @@ import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 export class UserService {
   constructor(public auth: Auth, public firestore: Firestore) {}
 
-  async register(email: string, pass: string, age: string) {
+  async register(userForm: UserForm) {
     try {
       const createUserResponse = await createUserWithEmailAndPassword(
         this.auth,
-        email,
-        pass
+        userForm.email,
+        userForm.pass
       );
+
       const user = {
-        email,
+        ...userForm,
         uid: createUserResponse.user.uid,
-        age,
       };
       const docRef = doc(
         this.firestore,
@@ -49,8 +59,25 @@ export class UserService {
     return this.auth.signOut();
   }
 
-  getUser() {
-    return this.auth.currentUser;
+  async getUser() {
+    const auth = getAuth();
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(
+        auth,
+        (user) => {
+          unsubscribe(); // Unsubscribe after receiving the first result
+          resolve(user); // Resolve the promise with the user object
+        },
+        reject
+      ); // Reject the promise on error
+    });
+  }
+
+  async getUserFullDetails(userId: string) {
+    const userRef = doc(this.firestore, 'users', userId);
+    const userDoc = await getDoc(userRef);
+
+    return userDoc.data();
   }
 
   onUserStateChanged(fn: any) {

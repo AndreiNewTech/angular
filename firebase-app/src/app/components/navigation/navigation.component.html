@@ -3,11 +3,17 @@
 <nav class="navbar" *ngIf="isUserLogged">
   <ul>
     <li>
-      <a [routerLink]="''">Home</a>
+      <a [routerLink]="'user/robots'">Home</a>
     </li>
     <li>
-      <a (click)="handleLogout()">Logout</a>
+      <a [routerLink]="'user/add-robot'">Add Robot</a>
     </li>
 
+    <li>
+      <a [routerLink]="''" (click)="handleLogout()">Logout</a>
+    </li>
   </ul>
+  <span>
+    <a [routerLink]="'user/profile'">{{ userName }}</a>
+  </span>
 </nav>

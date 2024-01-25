@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { Auth } from '@angular/fire/auth';
 import { Route, Router } from '@angular/router';
-import { UserService } from '../user.service';
+import { UserService } from 'src/app/services/auth/user.service';
 
 @Component({
   selector: 'app-register',
@@ -10,9 +10,11 @@ import { UserService } from '../user.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  registerEmail = '';
-  registerPass = '';
-  registerAge = '';
+  email = '';
+  pass = '';
+  age = 0;
+  name = '';
+  surname = '';
   userEmailAlreadyExists = false;
 
   constructor(
@@ -21,15 +23,18 @@ export class RegisterComponent {
     public router: Router
   ) {}
 
-  handleSubmitRegister(
-    registerEmail: string,
-    registerPass: string,
-    registerAge: string
-  ) {
+  handleSubmitRegister() {
+    const userForm = {
+      email: this.email,
+      pass: this.pass,
+      age: this.age,
+      name: this.name,
+      surname: this.surname,
+    };
     this.userService
-      .register(registerEmail, registerPass, registerAge)
+      .register(userForm)
       .then(() => this.router.navigate(['']))
-      .catch((er) => {
+      .catch((er: any) => {
         if (er.message.includes('Email already exists')) {
           console.log('Email already exists From the client');
           this.userEmailAlreadyExists = true;

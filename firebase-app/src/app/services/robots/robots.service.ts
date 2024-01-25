@@ -15,7 +15,7 @@ import {
 } from '@angular/fire/firestore';
 import { WhereFilterOp } from 'firebase/firestore';
 import { switchMap } from 'rxjs';
-import { UserService } from '../user/user.service';
+import { UserService } from 'src/app/services/auth/user.service';
 
 interface WhereClauseI {
   rightVal?: string;
@@ -35,6 +35,12 @@ export class RobotsService {
   collectionRef = collection(this.firestore, 'roboti');
 
   constructor(public firestore: Firestore, public userService: UserService) {}
+
+  async getRobot(robotId: string) {
+    const robotDocRef = doc(this.firestore, 'roboti', robotId);
+    const docData = await getDoc(robotDocRef);
+    return docData.data();
+  }
 
   // CRUD
   // READ and Listen
@@ -59,16 +65,9 @@ export class RobotsService {
   }
 
   // UPDATED
-  updateRobot(robotId: string) {
+  async updateRobot(robotFormData: any, robotId: string) {
     const docRef = doc(this.firestore, 'roboti', robotId);
-
-    try {
-      updateDoc(docRef, { nume: 'RobotX' }).then(() => {
-        console.log('Robot updated');
-      });
-    } catch (error) {
-      console.error('Problem updating doc');
-    }
+    return updateDoc(docRef, robotFormData);
   }
 
   // DELETE
@@ -88,10 +87,10 @@ export class RobotsService {
     whereClauseObj: WhereClauseI = {},
     orderByObj: OrderByI = {}
   ) {
-    const user = this.userService.getUser();
+    const user = (await this.userService.getUser()) as any;
     const userId = user?.uid || '';
 
-    if (!userId) throw new Error('User not logged');
+    if (!userId) return;
 
     // Initialize the base query with the collection
     let queryRef = query(

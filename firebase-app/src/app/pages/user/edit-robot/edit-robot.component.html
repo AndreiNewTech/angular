@@ -1,0 +1,16 @@
+<div class="container">
+  <form (ngSubmit)="handleSumbit()">
+    <p> Nume </p>
+    <input name="name" [(ngModel)]="name">
+    <p> Culoare </p>
+    <input name="color" [(ngModel)]="color">
+    <p> Varsta </p>
+    <input   name="age" [(ngModel)]="age">
+    <p> Autonomie (km) </p>
+    <input   name="autonomy" [(ngModel)]="autonomy">
+    <p> Viteza (km/h)</p>
+    <input   name="spped" [(ngModel)]="speed">
+    <button type="submit"> Submit Change </button>
+  </form>
+</div>
+
