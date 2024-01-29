@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { FeatureAuthGuardService } from './guards/feature-auth-guard.service';
 import { AddRobotComponent } from './pages/user/add-robot/add-robot.component';
 import { EditRobotComponent } from './pages/user/edit-robot/edit-robot.component';
+import { AdminRobotsComponent } from './pages/admin/robots/admin-robots/admin-robots.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user/robots', pathMatch: 'full' },
@@ -17,16 +18,24 @@ const routes: Routes = [
   },
   { path: 'user/add-robot', component: AddRobotComponent },
   { path: 'user/edit-robot/:id', component: EditRobotComponent },
+
+  { path: 'admin', redirectTo: 'admin/robots', pathMatch: 'full' },
+  {
+    path: 'admin/robots',
+    component: AdminRobotsComponent,
+    canActivate: [AuthGuardService],
+  },
+
   // { path: '/user/profile', component: RobotsComponent, canActivate: [AuthGuardService] },
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [FeatureAuthGuardService],
+    canActivate: [AuthGuardService],
   },
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [FeatureAuthGuardService],
+    canActivate: [AuthGuardService],
   },
 ];
 

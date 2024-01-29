@@ -5,6 +5,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
+
+  &--admin {
+    background-color: rgb(0, 42, 114);
+  }
 }
 
 /* Styling for the navbar list */

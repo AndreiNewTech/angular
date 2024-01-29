@@ -10,27 +10,23 @@ import { UserService } from '../../services/auth/user.service';
 export class NavigationComponent {
   isUserLogged: boolean = false;
   userName = '';
+  userRole = '';
   constructor(public userService: UserService, public router: Router) {
-    this.userService
-      .getUser()
-      .then((val: any) => {
+    this.userService.onAuthStateChangedReturn((user: any) => {
+      if (user) {
         this.userService
-          .getUserFullDetails(val.uid)
+          .getUserFullDetails(user.uid)
           .then((userDetails: any) => {
             console.log(userDetails);
             this.userName = this.createUserName(
               userDetails.surname,
               userDetails.name
             );
+            this.userRole = userDetails.role;
           });
-
-        this.isUserLogged = Boolean(val);
-        console.log(val, 'Val');
-      })
-      .catch(() => {
-        this.isUserLogged = false;
-        console.log('Catch');
-      });
+      }
+      this.isUserLogged = Boolean(user);
+    });
   }
 
   handleLogout() {
@@ -38,6 +34,10 @@ export class NavigationComponent {
       this.router.navigate(['login']);
       this.isUserLogged = false;
     });
+  }
+
+  get isAdmin(): boolean {
+    return this.userRole === 'ADMIN';
   }
 
   private createUserName(name: string, surname: string) {

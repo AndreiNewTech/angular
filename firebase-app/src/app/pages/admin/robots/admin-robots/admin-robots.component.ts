@@ -1,23 +1,17 @@
 import { Component } from '@angular/core';
-import {
-  Firestore,
-  addDoc,
-  collection,
-  getDocs,
-  query,
-  where,
-} from '@angular/fire/firestore';
-import { RobotsService } from '../../../services/robots/robots.service';
-import { UserService } from 'src/app/services/auth/user.service';
-import { Observable } from 'rxjs';
+import { Auth } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/services/auth/user.service';
+import { RobotsService } from 'src/app/services/robots/robots.service';
 
 @Component({
-  selector: 'app-robots',
-  templateUrl: './robots.component.html',
-  styleUrls: ['./robots.component.scss'],
+  selector: 'app-admin-robots',
+  templateUrl: './admin-robots.component.html',
+  styleUrls: ['./admin-robots.component.scss'],
 })
-export class RobotsComponent {
+export class AdminRobotsComponent {
   robots = [] as any;
   subscription: Observable<any> | any;
 
@@ -29,9 +23,10 @@ export class RobotsComponent {
   ) {
     // Read
   }
+
   ngOnInit() {
     this.subscription = this.robotsService
-      .getRobotsChanges()
+      .getRobotsChanges('ADMIN')
       .subscribe((robots) => {
         this.robots = [...robots];
       });

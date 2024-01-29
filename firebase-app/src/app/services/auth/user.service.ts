@@ -76,8 +76,11 @@ export class UserService {
   async getUserFullDetails(userId: string) {
     const userRef = doc(this.firestore, 'users', userId);
     const userDoc = await getDoc(userRef);
-
     return userDoc.data();
+  }
+
+  onAuthStateChangedReturn(fn: any) {
+    return onAuthStateChanged(this.auth, fn);
   }
 
   onUserStateChanged(fn: any) {

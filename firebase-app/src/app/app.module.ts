@@ -13,6 +13,7 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AddRobotComponent } from './pages/user/add-robot/add-robot.component';
 import { EditRobotComponent } from './pages/user/edit-robot/edit-robot.component';
+import { AdminRobotsComponent } from './pages/admin/robots/admin-robots/admin-robots.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { EditRobotComponent } from './pages/user/edit-robot/edit-robot.component
     NavigationComponent,
     AddRobotComponent,
     EditRobotComponent,
+    AdminRobotsComponent,
   ],
   imports: [
     provideFirestore(() => getFirestore()),

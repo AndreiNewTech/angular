@@ -19,15 +19,26 @@ export class LoginComponent {
     public router: Router
   ) {
     if (this.auth.currentUser?.email) {
-      this.userEmail = this.auth.currentUser?.email;
+      // this.userEmail = this.auth.currentUser?.email;
     }
   }
 
   handleSubmitLogin(loginEmail: string, loginPass: string) {
-    this.userService.signin(loginEmail, loginPass).then(() => {
-      this.userEmail = this.auth.currentUser?.email;
+    this.userService.signin(loginEmail, loginPass).then((user) => {
+      console.log(user);
+      if (user.user.uid) {
+        this.userService
+          .getUserFullDetails(user.user.uid)
+          .then((userDetails: any) => {
+            if (userDetails?.role === 'ADMIN') {
+              this.router.navigate(['admin/robots']);
+            }
 
-      this.router.navigate(['']);
+            if (userDetails?.role === 'USER') {
+              this.router.navigate(['']);
+            }
+          });
+      }
     });
   }
 }

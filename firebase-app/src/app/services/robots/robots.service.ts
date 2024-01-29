@@ -44,10 +44,10 @@ export class RobotsService {
 
   // CRUD
   // READ and Listen
-  getRobotsChanges() {
+  getRobotsChanges(userRole = 'USER') {
     return collectionChanges(query(collection(this.firestore, 'roboti'))).pipe(
       switchMap(async () => {
-        const val = await this.getUserDocsList('roboti');
+        const val = await this.getUserDocsList('roboti', userRole);
         return val;
       })
     );
@@ -84,6 +84,7 @@ export class RobotsService {
 
   private async getUserDocsList(
     listIdName: string,
+    role: string = 'USER',
     whereClauseObj: WhereClauseI = {},
     orderByObj: OrderByI = {}
   ) {
@@ -91,12 +92,21 @@ export class RobotsService {
     const userId = user?.uid || '';
 
     if (!userId) return;
+    let queryRef;
 
     // Initialize the base query with the collection
-    let queryRef = query(
-      collection(this.firestore, listIdName),
-      where('userId', '==', userId)
-    );
+    if (role === 'USER') {
+      queryRef = query(
+        collection(this.firestore, listIdName),
+        where('userId', '==', userId)
+      );
+    } else {
+      // Is admin
+      queryRef = query(
+        collection(this.firestore, listIdName),
+        where('userId', '!=', '')
+      );
+    }
 
     // Add 'where' clause if the necessary properties exist
     if (

@@ -1,6 +1,6 @@
 
 
-<nav class="navbar" *ngIf="isUserLogged">
+<nav class="navbar"  *ngIf="isUserLogged && !isAdmin; else adminNav">
   <ul>
     <li>
       <a [routerLink]="'user/robots'">Home</a>
@@ -17,3 +17,25 @@
     <a [routerLink]="'user/profile'">{{ userName }}</a>
   </span>
 </nav>
+
+<ng-template #adminNav>
+  <ng-container *ngIf="isUserLogged">
+    <nav class="navbar navbar--admin" >
+      <ul>
+        <li>
+          <a [routerLink]="'admin/robots'">Home</a>
+        </li>
+        <li>
+          <a [routerLink]="'admin/users'">Users</a>
+        </li>
+    
+        <li>
+          <a [routerLink]="''" (click)="handleLogout()">Logout</a>
+        </li>
+      </ul>
+      <span>
+        <a [routerLink]="'admin/profile'">{{ userName }}</a>
+      </span>
+    </nav>
+  </ng-container>
+</ng-template>
