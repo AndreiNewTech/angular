@@ -17,7 +17,6 @@ export class NavigationComponent {
         this.userService
           .getUserFullDetails(user.uid)
           .then((userDetails: any) => {
-            console.log(userDetails);
             this.userName = this.createUserName(
               userDetails.surname,
               userDetails.name

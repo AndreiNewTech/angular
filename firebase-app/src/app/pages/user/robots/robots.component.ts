@@ -21,6 +21,10 @@ export class RobotsComponent {
   robots = [] as any;
   subscription: Observable<any> | any;
 
+  name: string = '';
+  color: string = '';
+  age: string = '';
+
   constructor(
     public firestore: Firestore,
     public robotsService: RobotsService,
@@ -31,7 +35,7 @@ export class RobotsComponent {
   }
   ngOnInit() {
     this.subscription = this.robotsService
-      .getRobotsChanges()
+      .getRobotsChanges('USER', [])
       .subscribe((robots) => {
         this.robots = [...robots];
       });
@@ -43,6 +47,37 @@ export class RobotsComponent {
 
   handleEdit(robotId: string) {
     this.router.navigate([`user/edit-robot/${robotId}`]);
+  }
+
+  handleFilterRobotsListSubmit() {
+    this.subscription.unsubscribe();
+
+    // Name Filter
+
+    const whereArr = [];
+    if (this.name) {
+      const endString = this.name.replace(/.$/, (c) =>
+        String.fromCharCode(c.charCodeAt(0) + 1)
+      );
+
+      const startNameWhere = where('name', '>=', this.name);
+      const endNameWhere = where('name', '<', endString);
+
+      whereArr.push(startNameWhere);
+      whereArr.push(endNameWhere);
+    }
+
+    if (this.color) {
+      const colorWhere = where('color', '==', this.color);
+      whereArr.push(colorWhere);
+    }
+
+    console.log(whereArr);
+    this.subscription = this.robotsService
+      .getRobotsChanges('USER', whereArr)
+      .subscribe((robots) => {
+        this.robots = [...robots];
+      });
   }
 
   ngOnDestroy() {

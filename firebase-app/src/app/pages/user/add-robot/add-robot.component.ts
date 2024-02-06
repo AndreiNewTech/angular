@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
+import { UserService } from 'src/app/services/auth/user.service';
 import { RobotsService } from 'src/app/services/robots/robots.service';
 
 @Component({
@@ -18,10 +19,8 @@ export class AddRobotComponent {
   constructor(
     public firestore: Firestore,
     public robotsService: RobotsService,
-    public auth: Auth
-  ) {
-    // Read
-  }
+    public userService: UserService
+  ) {}
 
   addRobot() {
     const robot = {
@@ -32,11 +31,11 @@ export class AddRobotComponent {
       speed: this.speed,
     };
 
-    if (this.auth.currentUser) {
+    this.userService.getUser().then((user: any) => {
       this.robotsService.addRobot({
         ...robot,
-        userId: this.auth.currentUser?.uid,
+        userId: user?.uid,
       });
-    }
+    });
   }
 }

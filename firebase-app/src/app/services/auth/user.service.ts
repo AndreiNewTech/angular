@@ -24,12 +24,14 @@ export class UserService {
 
   async register(userForm: UserForm) {
     try {
+      // 1. Adauga utilizator in fire auth (authentication)
       const createUserResponse = await createUserWithEmailAndPassword(
         this.auth,
         userForm.email,
         userForm.pass
       );
 
+      // 2. Adaugare in firestore
       const user = {
         ...userForm,
         uid: createUserResponse.user.uid,
@@ -81,9 +83,5 @@ export class UserService {
 
   onAuthStateChangedReturn(fn: any) {
     return onAuthStateChanged(this.auth, fn);
-  }
-
-  onUserStateChanged(fn: any) {
-    return this.auth.onAuthStateChanged(fn);
   }
 }

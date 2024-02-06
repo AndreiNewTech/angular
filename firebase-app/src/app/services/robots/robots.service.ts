@@ -13,14 +13,14 @@ import {
   collectionChanges,
   orderBy,
 } from '@angular/fire/firestore';
-import { WhereFilterOp } from 'firebase/firestore';
+import { FieldPath, WhereFilterOp } from 'firebase/firestore';
 import { switchMap } from 'rxjs';
 import { UserService } from 'src/app/services/auth/user.service';
 
 interface WhereClauseI {
-  rightVal?: string;
+  leftVal?: string | FieldPath;
   centerVal?: WhereFilterOp;
-  leftVal?: string | number;
+  rightVal?: string;
 }
 
 interface OrderByI {
@@ -44,10 +44,14 @@ export class RobotsService {
 
   // CRUD
   // READ and Listen
-  getRobotsChanges(userRole = 'USER') {
+  getRobotsChanges(userRole = 'USER', queryObjList: any = []) {
     return collectionChanges(query(collection(this.firestore, 'roboti'))).pipe(
       switchMap(async () => {
-        const val = await this.getUserDocsList('roboti', userRole);
+        const val = await this.getUserDocsList(
+          'roboti',
+          userRole,
+          queryObjList
+        );
         return val;
       })
     );
@@ -85,44 +89,54 @@ export class RobotsService {
   private async getUserDocsList(
     listIdName: string,
     role: string = 'USER',
-    whereClauseObj: WhereClauseI = {},
+    whereClauseObjList: WhereClauseI[] = [],
     orderByObj: OrderByI = {}
   ) {
     const user = (await this.userService.getUser()) as any;
     const userId = user?.uid || '';
 
+    console.log(whereClauseObjList);
+
     if (!userId) return;
-    let queryRef;
+
+    const retQuery = () => {
+      const userWhereClause = where('userId', '==', userId);
+      const adminWhereClause = where('userId', '!=', '');
+      const arrWhereClause = [];
+
+      if (role === 'USER') {
+        arrWhereClause.push(userWhereClause);
+      }
+
+      if (role === 'ADMIN') {
+        arrWhereClause.push(adminWhereClause);
+      }
+
+      if (whereClauseObjList.length > 0) {
+        whereClauseObjList.forEach((clause) => {
+          arrWhereClause.push(clause);
+        });
+      }
+
+      return arrWhereClause;
+    };
+
+    let queryRef = query(collection(this.firestore, listIdName), ...retQuery());
+
+    console.log(queryRef);
 
     // Initialize the base query with the collection
-    if (role === 'USER') {
-      queryRef = query(
-        collection(this.firestore, listIdName),
-        where('userId', '==', userId)
-      );
-    } else {
-      // Is admin
-      queryRef = query(
-        collection(this.firestore, listIdName),
-        where('userId', '!=', '')
-      );
-    }
+    // if (role === 'USER') {
+    //   queryRef = query(collection(this.firestore, listIdName), ...retQuery());
+    // } else {
+    //   // Is admin
+    //   queryRef = query(
+    //     collection(this.firestore, listIdName),
+    //     where('userId', '!=', '')
+    //   );
+    // }
 
     // Add 'where' clause if the necessary properties exist
-    if (
-      whereClauseObj?.rightVal &&
-      whereClauseObj?.centerVal &&
-      whereClauseObj?.leftVal
-    ) {
-      queryRef = query(
-        queryRef,
-        where(
-          whereClauseObj.rightVal,
-          whereClauseObj.centerVal,
-          whereClauseObj.leftVal
-        )
-      );
-    }
 
     // Add 'orderBy' clause if the pathProperty exists
     if (orderByObj?.pathProperty) {

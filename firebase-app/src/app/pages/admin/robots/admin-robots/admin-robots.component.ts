@@ -26,7 +26,7 @@ export class AdminRobotsComponent {
 
   ngOnInit() {
     this.subscription = this.robotsService
-      .getRobotsChanges('ADMIN')
+      .getRobotsChanges('ADMIN', [])
       .subscribe((robots) => {
         this.robots = [...robots];
       });
