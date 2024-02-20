@@ -19,8 +19,11 @@ export class AuthGuardService implements CanActivate {
       .then(async (user: any) => {
         const currentRoute = state.url.split('/')[1];
 
-        console.log(route, state);
         if (!user) {
+          if (currentRoute === 'register') {
+            return true;
+          }
+
           if (currentRoute !== 'login') {
             this.router.navigate(['/login']);
             return false;
@@ -28,8 +31,6 @@ export class AuthGuardService implements CanActivate {
             return true;
           }
         }
-
-        // De reparat
 
         const userDetails = await this.userService
           .getUserFullDetails(user.uid)
@@ -42,12 +43,12 @@ export class AuthGuardService implements CanActivate {
           const isUserAdmin = userDetails['role'] === 'ADMIN';
 
           if (currentRoute === 'admin' && !isUserAdmin) {
-            this.router.navigate(['user']);
+            this.router.navigate(['/user/robots']);
             return false;
           }
 
           if (currentRoute === 'user' && isUserAdmin) {
-            this.router.navigate(['admin']);
+            this.router.navigate(['/admin/robots']);
             return false;
           }
 

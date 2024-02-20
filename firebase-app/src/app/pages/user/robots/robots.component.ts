@@ -72,6 +72,11 @@ export class RobotsComponent {
       whereArr.push(colorWhere);
     }
 
+    if (this.age) {
+      const ageWhere = where('age', '>=', parseInt(this.age));
+      whereArr.push(ageWhere);
+    }
+
     console.log(whereArr);
     this.subscription = this.robotsService
       .getRobotsChanges('USER', whereArr)

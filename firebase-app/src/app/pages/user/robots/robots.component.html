@@ -10,7 +10,7 @@
         <input name="name" [(ngModel)]="name">
         <p> Culoare </p>
         <input name="color" [(ngModel)]="color">
-        <p> Varsta </p>
+        <p> Varsta mai mare</p>
         <input   name="age" [(ngModel)]="age">
         <button type="submit"> Filter </button>
     </form>
@@ -44,13 +44,3 @@
 
 
 
-
-<!-- <ul>
-  <li *ngFor="let robot of robots">
-    <div>Nume:{{ robot.nume }}</div>
-    <div [ngStyle]="{'background': robot.culoare}"> Culoare:{{ robot.culoare }}</div>
-    <div>Varsta: {{ robot.varsta }}</div>
-    <button (click)="handleDelete(robot.id)"> X </button>
-    <button (click)="handleModify(robot.id)"> Modify </button>
-  </li>
-</ul> -->

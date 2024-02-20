@@ -13,8 +13,8 @@ export class AddRobotComponent {
   name: string = '';
   color: string = '';
   age: string = '';
-  autonomy: number = 0; //h
-  speed: number = 0; //km/h
+  autonomy: string = ''; //h
+  speed: string = ''; //km/h
 
   constructor(
     public firestore: Firestore,
@@ -26,16 +26,22 @@ export class AddRobotComponent {
     const robot = {
       name: this.name,
       color: this.color,
-      age: this.age,
-      autonomy: this.autonomy,
-      speed: this.speed,
+      age: parseInt(this.age),
+      autonomy: parseFloat(this.autonomy),
+      speed: parseFloat(this.speed),
     };
 
-    this.userService.getUser().then((user: any) => {
-      this.robotsService.addRobot({
-        ...robot,
-        userId: user?.uid,
-      });
+    const userId = this.userService.getUserId();
+    this.robotsService.addRobot({
+      ...robot,
+      userId: userId,
     });
+
+    // Reset
+    this.name = '';
+    this.color = '';
+    this.age = '';
+    this.autonomy = '';
+    this.speed = '';
   }
 }

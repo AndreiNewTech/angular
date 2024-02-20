@@ -41,3 +41,63 @@
     }
   }
 }
+
+/* Container style */
+.container {
+  max-width: 100%; /* Adjust based on your preference */
+  margin: 0 auto; /* Center the container */
+  padding: 20px;
+  background-color: #f5f5f5; /* Light grey background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Form style to use flexbox */
+.container form {
+  display: flex;
+  flex-wrap: wrap; /* Allows items to wrap to the next line as needed */
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Space between items */
+}
+
+/* Headings style */
+.container h1 {
+  width: 100%; /* Full width to ensure it's on its own line */
+  color: #333; /* Dark grey color */
+  font-size: 24px; /* Adjust the font size */
+  text-align: center; /* Center the heading */
+  margin-bottom: 20px; /* Space below the heading */
+}
+
+/* Paragraphs (labels) removed for inline style */
+
+/* Input fields style */
+.container input {
+  padding: 8px; /* Padding inside the inputs */
+  border: 1px solid #ccc; /* Light grey border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Adjustments for inline display, you might need to adjust widths */
+.container input[name="name"],
+.container input[name="color"],
+.container input[name="age"] {
+  flex: 1; /* Allows inputs to grow and fill available space */
+}
+
+/* Button style */
+.container button {
+  padding: 10px; /* Padding inside the button */
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Adjust the font size */
+}
+
+/* Button hover effect */
+.container button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

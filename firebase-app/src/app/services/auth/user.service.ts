@@ -6,7 +6,15 @@ import {
   getAuth,
   onAuthStateChanged,
 } from '@angular/fire/auth';
-import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  query,
+  setDoc,
+} from '@angular/fire/firestore';
+import { getDocs } from 'firebase/firestore';
 
 export interface UserForm {
   name: string;
@@ -35,6 +43,7 @@ export class UserService {
       const user = {
         ...userForm,
         uid: createUserResponse.user.uid,
+        role: 'USER',
       };
       const docRef = doc(
         this.firestore,
@@ -61,6 +70,17 @@ export class UserService {
     return this.auth.signOut();
   }
 
+  async getUsers() {
+    let userDetails = (await this.getUserFullDetails(
+      this.getUserId() || ''
+    )) as any;
+    if (userDetails.role === 'ADMIN') {
+      const userCollection = collection(this.firestore, 'users');
+      return getDocs(query(userCollection));
+    }
+    throw new Error('Error accessing the current user');
+  }
+
   async getUser() {
     const auth = getAuth();
     return new Promise((resolve, reject) => {
@@ -73,6 +93,12 @@ export class UserService {
         reject
       ); // Reject the promise on error
     });
+  }
+
+
+
+  getUserId() {
+    return this.auth.currentUser?.uid;
   }
 
   async getUserFullDetails(userId: string) {

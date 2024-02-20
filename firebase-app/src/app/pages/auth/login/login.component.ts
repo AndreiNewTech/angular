@@ -25,7 +25,6 @@ export class LoginComponent {
 
   handleSubmitLogin(loginEmail: string, loginPass: string) {
     this.userService.signin(loginEmail, loginPass).then((user) => {
-      console.log(user);
       if (user.user.uid) {
         this.userService
           .getUserFullDetails(user.user.uid)

@@ -10,8 +10,10 @@ import { UserService } from '../../services/auth/user.service';
 export class NavigationComponent {
   isUserLogged: boolean = false;
   userName = '';
-  userRole = '';
-  constructor(public userService: UserService, public router: Router) {
+  userRole = 'USER';
+  constructor(public userService: UserService, public router: Router) {}
+
+  ngOnInit() {
     this.userService.onAuthStateChangedReturn((user: any) => {
       if (user) {
         this.userService

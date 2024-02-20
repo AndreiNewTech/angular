@@ -92,8 +92,8 @@ export class RobotsService {
     whereClauseObjList: WhereClauseI[] = [],
     orderByObj: OrderByI = {}
   ) {
-    const user = (await this.userService.getUser()) as any;
-    const userId = user?.uid || '';
+    const userId = this.userService.getUserId();
+    // const userId = user?.uid || '';
 
     console.log(whereClauseObjList);
 
@@ -101,7 +101,7 @@ export class RobotsService {
 
     const retQuery = () => {
       const userWhereClause = where('userId', '==', userId);
-      const adminWhereClause = where('userId', '!=', '');
+      // const adminWhereClause = where('userId', '!=', '');
       const arrWhereClause = [];
 
       if (role === 'USER') {
@@ -109,7 +109,7 @@ export class RobotsService {
       }
 
       if (role === 'ADMIN') {
-        arrWhereClause.push(adminWhereClause);
+        // arrWhereClause.push(adminWhereClause);
       }
 
       if (whereClauseObjList.length > 0) {
@@ -122,21 +122,6 @@ export class RobotsService {
     };
 
     let queryRef = query(collection(this.firestore, listIdName), ...retQuery());
-
-    console.log(queryRef);
-
-    // Initialize the base query with the collection
-    // if (role === 'USER') {
-    //   queryRef = query(collection(this.firestore, listIdName), ...retQuery());
-    // } else {
-    //   // Is admin
-    //   queryRef = query(
-    //     collection(this.firestore, listIdName),
-    //     where('userId', '!=', '')
-    //   );
-    // }
-
-    // Add 'where' clause if the necessary properties exist
 
     // Add 'orderBy' clause if the pathProperty exists
     if (orderByObj?.pathProperty) {

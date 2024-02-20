@@ -1,6 +1,6 @@
 
 
-<nav class="navbar"  *ngIf="isUserLogged && !isAdmin; else adminNav">
+<nav class="navbar" *ngIf="isUserLogged && !isAdmin && userRole === 'USER'; else adminNav">
   <ul>
     <li>
       <a [routerLink]="'user/robots'">Home</a>
